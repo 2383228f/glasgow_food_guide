@@ -1,12 +1,15 @@
 <!DOCTYPE html>
-{% extends 'food/base.html' %}
-{% load staticfiles %}
 
+{% extends 'food/base.html' %}
+
+{% load staticfiles %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/basic/basic.css' %}">
 
 {% block title_block %}
 	Homepage
 {% endblock %}
-	
+
 {% block body_block %}
 		<h1>Rango says...</h1>
 		<div>
@@ -22,10 +25,17 @@
 		<div>
 		
 		</div>
-		
+		<form>
+		<select name="restraunt">
+			<option value="mcdonalds">mcdonalds</option>
+			<option value="kfc">kfc</option>
+			<option value="bruger king">burger king</option>
+		</select>
+		</form>	
 		<div>
             <li><a href="{% url 'food:register' %}">Sign Up</a></li>
 		</div>
+		
 {% endblock %}
 	
 </html>

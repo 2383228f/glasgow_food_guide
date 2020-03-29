@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 {% load staticfiles %}
-
+{% load static %}
 
 <html>
-	<head lang="en">
+	<head>
 		<meta charset="UTF-8"/>
-		 <link rel="stylesheet" href="style.css">
+		<link rel="stylesheet" type="text/css" href="{% static 'css/basic/basic.css' %}">
+		
 		 <title>
 			Rango - 
 			{% block title_block %}
@@ -24,10 +25,9 @@
 				
 			{% endblock %}
 		</div>
-      <header><li><a href="{% url 'food:register' %}">Sign up</a></header>
-      <nav><li><a href="{% url 'food:login' %}">Login</a></li></nav>
+      <header><li><a href="{% url 'food:register' %}">Sign Up</a></li></header>
+      <nav><li><a href="{% url 'food:login' %}">Log In</a></li></nav>
       <footer>Contact Details +132041230482134</footer>
-	  <home> <li><a href="{% url 'food:index' %}">Index</a></li> </home>
-	  <maintxt> bla bla bla </maintxt>
+	  <home><li><a href="{% url 'food:index' %}">Homepage</a></li></home>
     </body> 
 </html>
