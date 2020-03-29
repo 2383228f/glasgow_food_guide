@@ -11,3 +11,4 @@ class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ('is_owner', 'verified_by',)
+        

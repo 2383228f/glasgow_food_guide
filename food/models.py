@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.db.models.fields import CharField
+from django.db.models.fields import CharField, AutoField, IntegerField,\
+	EmailField
+
 
 
 # Create your models here.
@@ -13,3 +15,19 @@ class UserProfile(models.Model):
 	
 	def __str__(self):
 		return self.username
+	
+class Restaurant(models.Model):
+	Restaurant_ID = AutoField(primary_key=True)
+	owner = models.ForeignKey(UserProfile, on_delete = models.CASCADE)
+	name = CharField(max_length = 100)
+	address = CharField(max_length = 100, blank=True, null=True)
+	overview = CharField(max_length = 100)
+	detailed = CharField(max_length = 300, blank=True, null=True)
+	phoneNumber = IntegerField(blank=True, null=True)
+	emailAddress = EmailField(blank=True, null=True)
+	rating = IntegerField(default=0)
+	price = IntegerField(default=0)
+	
+	def __str__(self):
+		return self.Restaurant_ID+" "+self.name
+	

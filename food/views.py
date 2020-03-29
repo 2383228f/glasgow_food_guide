@@ -85,3 +85,23 @@ def user_login(request):
         # No context variables to pass to the template system, hence the
         # blank dictionary object...
         return render(request, 'food/login.html')
+    
+def add_restaurant(request):
+    form = RestaurantForm()
+    # A HTTP POST?
+    if request.method == 'POST':
+        form = RestaurantForm(request.POST)
+        # Have we been provided with a valid form?
+        if form.is_valid():
+            # Save the new category to the database.
+            form.save(commit=True)
+            # Now that the category is saved, we could confirm this.
+            # For now, just redirect the user back to the index view.
+            return redirect('/food/')
+        else:
+            # The supplied form contained errors -
+            # just print them to the terminal.
+            print(form.errors)
+    # Will handle the bad form, new form, or no form supplied cases.
+    # Render the form with error messages (if any).
+    return render(request, 'food/add_restaurant.html', {'form': form})
