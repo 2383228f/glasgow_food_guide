@@ -5,15 +5,16 @@
 <html>
 	<head lang="en">
 		<meta charset="UTF-8"/>
-		<title>
+		 <link rel="stylesheet" href="style.css">
+		 <title>
 			Rango - 
 			{% block title_block %}
 				How to Tango with Django!
 			{% endblock %}
 		</title>
-	</head>
-	<body>
-		<div>
+	  </head>
+    <body>
+	<div>
 		{% block body_block %}
 			This is body_block's default content.
 		{% endblock %}
@@ -23,17 +24,10 @@
 				
 			{% endblock %}
 		</div>
-		<hr />
-		<div>
-			<ul>
-				
-				<!-- Outside the conditional statements, ALWAYS show -->
-
-
-				<li><a href="{% url 'food:index' %}">Index</a></li>
-				<li><a href="{% url 'food:login' %}">Login</a></li>
-				</ul>
-
-		</div>
-	</body>
+      <header><li><a href="{% url 'food:Signup' %}">Sign up</a></header>
+      <nav><li><a href="{% url 'food:login' %}">Login</a></li></nav>
+      <footer>Contact Details +132041230482134</footer>
+	  <home> <li><a href="{% url 'food:index' %}">Index</a></li> </home>
+	  <maintxt> bla bla bla </maintxt>
+    </body> 
 </html>
