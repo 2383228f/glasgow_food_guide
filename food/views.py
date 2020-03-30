@@ -1,10 +1,12 @@
 from django.shortcuts import render
-from food.forms import UserForm, UserProfileForm
+from food.forms import UserForm, UserProfileForm, RestaurantForm
+from food.models import UserProfile
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.http import HttpResponse
 import profile
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def index(request):
@@ -85,7 +87,14 @@ def user_login(request):
         # No context variables to pass to the template system, hence the
         # blank dictionary object...
         return render(request, 'food/login.html')
-    
+
+@login_required
+def user_logout(request):
+    # Since we know the user is logged in, we can now just log them out.
+    logout(request)
+    # Take the user back to the homepage.
+    return redirect(reverse('food:index'))
+
 def add_restaurant(request):
     form = RestaurantForm()
     # A HTTP POST?
@@ -94,7 +103,13 @@ def add_restaurant(request):
         # Have we been provided with a valid form?
         if form.is_valid():
             # Save the new category to the database.
-            form.save(commit=True)
+            form = form.save(commit=False)
+            form.owner = UserProfile.objects.get(username=request.user.username)
+            print(form.owner)
+            print(UserProfile.objects.get(username='jamieman16'))
+            print(request.user.username)
+            # form.owner = request.user.username
+            form.save()
             # Now that the category is saved, we could confirm this.
             # For now, just redirect the user back to the index view.
             return redirect('/food/')

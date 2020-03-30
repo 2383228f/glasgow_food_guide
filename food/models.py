@@ -18,16 +18,16 @@ class UserProfile(models.Model):
 	
 class Restaurant(models.Model):
 	Restaurant_ID = AutoField(primary_key=True)
-	owner = models.ForeignKey(UserProfile, on_delete = models.CASCADE)
+	owner = models.ForeignKey(UserProfile, on_delete = models.CASCADE, null=True,blank=True)
 	name = CharField(max_length = 100)
 	address = CharField(max_length = 100, blank=True, null=True)
 	overview = CharField(max_length = 100)
 	detailed = CharField(max_length = 300, blank=True, null=True)
-	phoneNumber = IntegerField(blank=True, null=True)
-	emailAddress = EmailField(blank=True, null=True)
+	phone_number = IntegerField(blank=True, null=True)
+	email_address = EmailField(blank=True, null=True)
 	rating = IntegerField(default=0)
 	price = IntegerField(default=0)
 	
 	def __str__(self):
-		return self.Restaurant_ID+" "+self.name
+		return self.name
 	

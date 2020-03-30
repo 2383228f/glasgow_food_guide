@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from food.models import UserProfile
+from food.models import UserProfile, Restaurant
 
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
@@ -12,3 +12,17 @@ class UserProfileForm(forms.ModelForm):
         model = UserProfile
         fields = ('is_owner', 'verified_by',)
         
+class RestaurantForm(forms.ModelForm):
+    name = forms.CharField(max_length=100, help_text = "Please enter the restaurant name.")
+    address = forms.CharField(max_length=100, help_text = "Please enter the restaurant address.", required=False)
+    overview = forms.CharField(max_length=100, help_text = "Please enter a brief overview")
+    detailed = forms.CharField(max_length=300, required=False, help_text = "Please enter a detailed description")
+    phone_number = forms.IntegerField(required=False, help_text = "Please enter your phone number")
+    email_address = forms.EmailField(required=False, help_text = "Please enter your email address")
+    rating = forms.IntegerField(widget = forms.HiddenInput(), initial=0)
+    price = forms.IntegerField(widget = forms.HiddenInput(), initial=0)
+    owner = forms.ModelChoiceField(widget=forms.HiddenInput(),initial=UserProfile.objects.all().first(), queryset=UserProfile.objects.all())
+    
+    class Meta:
+        model=Restaurant
+        fields=('name', 'address', 'overview','detailed','phone_number','email_address',)
