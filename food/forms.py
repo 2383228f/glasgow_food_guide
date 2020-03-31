@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
-from food.models import UserProfile, Restaurant
+from food.models import UserProfile, Restaurant, Comment
+from datetime import datetime
 
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
@@ -26,3 +27,26 @@ class RestaurantForm(forms.ModelForm):
     class Meta:
         model=Restaurant
         fields=('name', 'address', 'overview','detailed','phone_number','email_address',)
+        
+class CommentForm(forms.ModelForm):
+    comment = forms.CharField(max_length=1000, help_text="Please write your comment here.")
+    rating_choices =( 
+    ("1", "One"), 
+    ("2", "Two"), 
+    ("3", "Three"), 
+    ("4", "Four"), 
+    ("5", "Five"),
+) 
+    date_time = forms.DateTimeField(widget = forms.HiddenInput(), initial=datetime.now())
+    rating = forms.ChoiceField(choices=rating_choices, help_text="rating")
+    price_choices =( 
+    ("1", "One"), 
+    ("2", "Two"), 
+    ("3", "Three"), 
+) 
+    restaurant = forms.ModelChoiceField(queryset=Restaurant.objects.all())
+    price = forms.ChoiceField(choices=price_choices,help_text="price")
+    
+    class Meta:
+        model = Comment
+        fields =('comment','rating','restaurant','price')

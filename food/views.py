@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from food.forms import UserForm, UserProfileForm, RestaurantForm
+from food.forms import UserForm, UserProfileForm, RestaurantForm, CommentForm
 from food.models import UserProfile
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect
@@ -7,7 +7,7 @@ from django.urls import reverse
 from django.http import HttpResponse
 import profile
 from django.contrib.auth.decorators import login_required
-
+from datetime import datetime
 # Create your views here.
 def index(request):
    
@@ -105,10 +105,6 @@ def add_restaurant(request):
             # Save the new category to the database.
             form = form.save(commit=False)
             form.owner = UserProfile.objects.get(username=request.user.username)
-            print(form.owner)
-            print(UserProfile.objects.get(username='jamieman16'))
-            print(request.user.username)
-            # form.owner = request.user.username
             form.save()
             # Now that the category is saved, we could confirm this.
             # For now, just redirect the user back to the index view.
@@ -120,3 +116,26 @@ def add_restaurant(request):
     # Will handle the bad form, new form, or no form supplied cases.
     # Render the form with error messages (if any).
     return render(request, 'food/add_restaurant.html', {'form': form})
+
+def add_comment(request):
+    form = CommentForm()
+    # A HTTP POST?
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        # Have we been provided with a valid form?
+        if form.is_valid():
+            # Save the new category to the database.
+            form = form.save(commit=False)
+            form.date_time =datetime.now()
+            form.user = UserProfile.objects.get(username=request.user.username)
+            form.save()
+            # Now that the category is saved, we could confirm this.
+            # For now, just redirect the user back to the index view.
+            return redirect('/food/')
+        else:
+            # The supplied form contained errors -
+            # just print them to the terminal.
+            print(form.errors)
+    # Will handle the bad form, new form, or no form supplied cases.
+    # Render the form with error messages (if any).
+    return render(request, 'food/add_comment.html', {'form': form})

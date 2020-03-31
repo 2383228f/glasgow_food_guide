@@ -1,8 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.db.models.fields import CharField, AutoField, IntegerField,\
-	EmailField
-
+from django.db.models.fields import CharField, AutoField, IntegerField,EmailField
+from django.template.defaultfilters import slugify
 
 
 # Create your models here.
@@ -17,9 +16,10 @@ class UserProfile(models.Model):
 		return self.username
 	
 class Restaurant(models.Model):
-	Restaurant_ID = AutoField(primary_key=True)
+	restaurant_ID = AutoField(primary_key=True)
 	owner = models.ForeignKey(UserProfile, on_delete = models.CASCADE, null=True,blank=True)
 	name = CharField(max_length = 100)
+	slug = models.SlugField(unique=True)
 	address = CharField(max_length = 100, blank=True, null=True)
 	overview = CharField(max_length = 100)
 	detailed = CharField(max_length = 300, blank=True, null=True)
@@ -28,6 +28,22 @@ class Restaurant(models.Model):
 	rating = IntegerField(default=0)
 	price = IntegerField(default=0)
 	
+	def save(self, *args, **kwargs):
+		self.slug = slugify(self.name)
+		super(Restaurant, self).save(*args, **kwargs)
+		
 	def __str__(self):
 		return self.name
+
+class Comment(models.Model):
+	review_ID = AutoField(primary_key=True)
+	user = models.ForeignKey(UserProfile, on_delete = models.SET_NULL, null=True)
+	restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
+	date_time = models.DateTimeField(null=True)
+	comment = CharField(max_length=1000)
+	rating = IntegerField()
+	price = IntegerField()
+	
+	def __str__(self):
+		return self.user.username+", "+self.restaurant.name
 	
