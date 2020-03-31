@@ -13,29 +13,32 @@
 {% block body_block %}
 		<h1>Rango says...</h1>
 		<div>
-			{{ boldmessage }}
+				{% if user.is_authenticated %}
+				<nav>howdy {{ user.username }}!</nav>
+		
+			{% endif %}
 		</div>
 		
 		<h2>Most Liked Categories</h2>
 		<div>
-		
-		</div> 
 		
 		<h2>Most Viewed Pages</h2>
 		<div>
 		
 		</div>
 		<form>
-		<select name="restraunt">
-			<option value="mcdonalds">mcdonalds</option>
-			<option value="kfc">kfc</option>
-			<option value="bruger king">burger king</option>
+		<select name="sortby">
+			<option value="price">price</option>
+			<option value="stars">stars</option>
 		</select>
+		<input type= "text" name =text class = "search" placeholder = "Search Here">
+		<input type= "submit" name =submit class = "submit" value = "Search">
 		</form>	
 		<div>
-            <li><a href="{% url 'food:register' %}">Sign Up</a></li>
+			{% if user.is_authenticated %}
+            
             <li><a href="{% url 'food:add_restaurant' %}">Add a restaurant!</a></li>
-            <li><a href="{% url 'food:add_comment' %}">Add a comment!</a></li>
+			{% endif %}
 		</div>
 		
 {% endblock %}
