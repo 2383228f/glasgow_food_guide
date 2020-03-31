@@ -5,6 +5,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8"/>
+		
 		<link rel="stylesheet" type="text/css" href="{% static 'css/basic/basic.css' %}">
 		
 		 <title>
@@ -13,28 +14,46 @@
 				How to Tango with Django!
 			{% endblock %}
 		</title>
-	</head>
+
+	  </head>
     <body>
 	<div>
+	{% if user.is_authenticated %}
+					<!-- Show these links when the user is logged in -->
+					<nav>
+					<label class="logo"> GlasgowFoood</label>
+					<ul>
+					<a href="{% url 'food:logout' %}">Logout</a></li>
+					<li><a class="active" href="{% url 'food:index' %}">Homepage</a></li>
+					</ul>
+					</nav>
+		{% else %}
+					<!-- Show these links when the user is NOT logged in -->
+					<nav>
+					<label class="logo"> GlasgowFoood</label>
+					<ul>
+					<li><a href="{% url 'food:register' %}">Sign Up</a></li>
+					<li><a href="{% url 'food:login' %}">Log In</a></li>
+					<li><a class="active" href="{% url 'food:index' %}">Homepage</a></li>
+					</ul>
+					</nav>
+				
+					
+		{% endif %}
 		{% block body_block %}
 			This is body_block's default content.
 		{% endblock %}
+		<footer>Contact Details +132041230482134</footer>
+		
 		</div>
 		<div>
 			{%block sidebar_block %}
 				
 			{% endblock %}
 		</div>
-		{% if user.is_authenticated %}
-					<!-- Show these links when the user is logged in -->
-					<header><li><a href="{% url 'food:logout' %}">Logout</a></li></header>
-		{% else %}
-					<!-- Show these links when the user is NOT logged in -->
-					<nav><li><a href="{% url 'food:register' %}">Sign Up</a></li></nav>
-					<header><li><a href="{% url 'food:login' %}">Log In</a></li></header>
-		{% endif %}
+		
   
-      <footer>Contact Details +132041230482134</footer>
-	  <home><li><a href="{% url 'food:index' %}">Homepage</a></li></home>
+    
+	  
     </body> 
 </html>
