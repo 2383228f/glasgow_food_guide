@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from food.forms import UserForm, UserProfileForm, RestaurantForm, CommentForm
-from food.models import UserProfile
+from food.models import UserProfile, Comment, Restaurant
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect
 from django.urls import reverse
@@ -117,7 +117,7 @@ def add_restaurant(request):
     # Render the form with error messages (if any).
     return render(request, 'food/add_restaurant.html', {'form': form})
 
-def add_comment(request):
+def add_comment(request, restaurant_name_slug):
     form = CommentForm()
     # A HTTP POST?
     if request.method == 'POST':
@@ -127,6 +127,7 @@ def add_comment(request):
             # Save the new category to the database.
             form = form.save(commit=False)
             form.date_time =datetime.now()
+            form.restaurant = Restaurant.objects.get(slug=restaurant_name_slug)
             form.user = UserProfile.objects.get(username=request.user.username)
             form.save()
             # Now that the category is saved, we could confirm this.
@@ -139,3 +140,34 @@ def add_comment(request):
     # Will handle the bad form, new form, or no form supplied cases.
     # Render the form with error messages (if any).
     return render(request, 'food/add_comment.html', {'form': form})
+
+def show_restaurant(request, restaurant_name_slug):
+    # Create a context dictionary which we can pass
+    # to the template rendering engine.
+    context_dict = {}
+    try:
+        # Can we find a category name slug with the given name?
+        # If we can't, the .get() method raises a DoesNotExist exception.
+        # The .get() method returns one model instance or raises an exception.
+        restaurant = Restaurant.objects.get(slug=restaurant_name_slug)
+        
+        # Retrieve all of the associated pages.
+        # The filter() will return a list of page objects or an empty list.
+        comments = Comment.objects.filter(restaurant=restaurant)
+        
+        # Adds our results list to the template context under name pages.
+        context_dict['comments'] = comments
+        # We also add the category object from
+        # the database to the context dictionary.
+        # We'll use this in the template to verify that the category exists.
+        context_dict['restaurant'] = restaurant
+    except Restaurant.DoesNotExist:
+        # We get here if we didn't find the specified category.
+        # Don't do anything -
+        # the template will display the "no category" message for us.
+        context_dict['restaurant'] = None
+        context_dict['comments'] = None
+        
+    # Go render the response and return it to the client.
+    return render(request, 'food/restaurant.html', context=context_dict)
+    

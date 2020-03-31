@@ -44,7 +44,7 @@ class CommentForm(forms.ModelForm):
     ("2", "Two"), 
     ("3", "Three"), 
 ) 
-    restaurant = forms.ModelChoiceField(queryset=Restaurant.objects.all())
+    restaurant = forms.ModelChoiceField(widget=forms.HiddenInput(),queryset=Restaurant.objects.all())
     price = forms.ChoiceField(choices=price_choices,help_text="price")
     
     class Meta:

@@ -5,10 +5,10 @@
 {% endblock %}
     
 {% block body_block %}
-        <h1>Add a Restaurant</h1>
+        <h1>Add a Comment</h1>
         {% if user.is_authenticated %}
             <div>
-                 <form id="category_form" method="post" action="{% url 'food:add_comment' %}">
+                 <form id="comment_form" method="post" action="{% url 'rango:show_restaurant' restaurant.slug %}/add_comment/">
                     {% csrf_token %}
                     {% for hidden in form.hidden_fields %}
                         {{ hidden }}
