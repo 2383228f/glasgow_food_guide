@@ -23,8 +23,13 @@
 					<nav>
 					<label class="logo"> GlasgowFoood</label>
 					<ul>
-					<a href="{% url 'food:logout' %}">Logout</a></li>
+					<a>{% if user.is_authenticated %}
+				    howdy {{ user.username }}!</a>
+		
+					<li><a href="{% url 'food:logout' %}">Logout</a></li>
 					<li><a class="active" href="{% url 'food:index' %}">Homepage</a></li>
+		
+			{% endif %}
 					</ul>
 					</nav>
 		{% else %}
@@ -43,9 +48,9 @@
 		{% block body_block %}
 			This is body_block's default content.
 		{% endblock %}
-		<footer>Contact Details +132041230482134</footer>
-		
+	
 		</div>
+		<footer>Contact Details +132041230482134</footer>
 		<div>
 			{%block sidebar_block %}
 				

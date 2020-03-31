@@ -11,21 +11,10 @@
 {% endblock %}
 
 {% block body_block %}
-		<h1>Rango says...</h1>
-		<div>
-				{% if user.is_authenticated %}
-				<nav>howdy {{ user.username }}!</nav>
+		<h1>Home</h1>
+
 		
-			{% endif %}
-		</div>
 		
-		<h2>Most Liked Categories</h2>
-		<div>
-		
-		<h2>Most Viewed Pages</h2>
-		<div>
-		
-		</div>
 		<form>
 		<select name="sortby">
 			<option value="price">price</option>
