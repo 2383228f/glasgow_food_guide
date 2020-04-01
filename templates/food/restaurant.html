@@ -2,6 +2,7 @@
 
 {% extends 'food/base.html' %}
 {% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/basic/basic.css' %}">
 
 {% block title_block %}
     {% if restaurant %}
@@ -16,9 +17,26 @@
         <h1>{{ restaurant.name }}</h1>
         {% if comments %}
             <ul>
-                {% for comment in comments %}
-                <p>{{comment.user.username}} says: {{comment.comment}} </p>
-                {% endfor %}  
+				<table class = "paleBlueRows">
+					<thead>
+						<tr>
+							<th>Username</th>
+							<th>Rating</th>
+							<th>Comment</th>
+							<th>Date</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for comment in comments %}
+							<tr>
+								<td>{{comment.user.username}}</td>
+								<td>{{comment.rating}}</td>
+								<td>{{comment.comment}}</td>
+								<td>{{comment.date_time}}</td>
+							</tr>
+						{% endfor %} 
+					</tbody>
+				</table> 
             </ul>
         {% else %}
             <strong>No comments currently in restaurant.</strong>
