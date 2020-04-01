@@ -45,7 +45,7 @@
 
 <script>
 function myMap() {
-var myLatLng = {lat: 55.8642, lng: -4.2518};
+var myLatLng = {lat: {{restaurant.lat}}, lng: {{restaurant.lng}}};
 var mapProp= {
   center:myLatLng,
   zoom:10,
@@ -54,7 +54,7 @@ var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
 var marker = new google.maps.Marker({
           position: myLatLng,
 	  map: map,
-          title: 'Location!',
+          title: "{{restaurant.name}}",
         });
 }
 </script>
