@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.db.models.fields import CharField, AutoField, IntegerField,EmailField, FloatField
 from django.template.defaultfilters import slugify
 from django_mysql.models import ListCharField
-
+from django.conf import settings
 
 # Create your models here.
 class UserProfile(models.Model):
@@ -28,7 +28,7 @@ class Restaurant(models.Model):
 	email_address = EmailField(blank=True, null=True)
 	rating = IntegerField(default=0)
 	price = IntegerField(default=0)
-	picture = CharField(max_length = 100)
+	picture = models.FileField(upload_to=settings.MEDIA_ROOT, null=True)
 	lat = FloatField(default=55.8642)
 	lng = FloatField(default=-4.2518)
 	

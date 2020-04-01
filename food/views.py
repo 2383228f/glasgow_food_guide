@@ -9,6 +9,7 @@ import profile
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
 from django.template.defaultfilters import slugify
+from django.core.files.storage import FileSystemStorage
 # Create your views here.
 def index(request):
    
@@ -109,6 +110,7 @@ def add_restaurant(request):
             # Save the new category to the database.
             form = form.save(commit=False)
             form.owner = UserProfile.objects.get(username=request.user.username)
+            form.model_pic = form.cleaned_data['image']
             form.save()
             # Now that the category is saved, we could confirm this.
             # For now, just redirect the user back to the index view.
