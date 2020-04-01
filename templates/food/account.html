@@ -14,7 +14,9 @@
 {% endblock %}
 
 {% block body_block %}
+    <h2>{{boldmessage}}</h2>
 
+    <h3>My favourites</h3>
     {% for slug in slugs %}
 
          <li>
@@ -25,15 +27,11 @@
     {% endfor %}
 
 
-  
-    <form id="comment_form" method="post" action="{% url 'food:add_favourite'  %}">
-
-                {% csrf_token %}
-                    Please enter the name of one of your favourite restaurant
-                   {% for field in form.visible_fields %}
-                    {{field}}
-                {%endfor%}
-         <input type="submit" name="submit" value="Add favourite" />
+    <h3>Add a new favourite </h3>
+    <form id = "add_favourite_form" method = "get" action="{% url 'food:add_favourite' %}">
+        
+        <input type= "text" name =text class = "search" placeholder = "Type restaurant name here">
+        <input type= "submit" name =submit class = "submit" value = "Search">
     </form>
 
  {% endblock %}

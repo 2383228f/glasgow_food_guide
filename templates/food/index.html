@@ -23,7 +23,7 @@
 		
 		<div>
             <li><a href="{% url 'food:show_restaurants' %}">See our restaurants!</a></li>
-
+            <li><a href="{% url 'food:account' %}">See your account!</a></li>
             {% if user_profile.is_owner %}
                 <li><a href="{% url 'food:add_restaurant' %}">Add a restaurant!</a></li>
             

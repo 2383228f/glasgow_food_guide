@@ -210,56 +210,52 @@ def search(request):
         
 def account(request):
    
-    
+    print("hello")
     context_dict = {}
     context_dict['boldmessage'] = 'Welcome to Glasgow Food Guide!'
-    context_dict['user_profile'] = UserProfile.objects.get(username=request.user.username)
+    user_profile=UserProfile.objects.get(username=request.user.username)
+    context_dict['user_profile'] = user_profile
+    context_dict['slugs'] = []
+    for favourite in user_profile.favourites:
+        context_dict['slugs'].append(favourite)
 
+    
     response = render(request, 'food/account.html', context=context_dict)
     return response
     
     
 def add_favourite(request):
-    form = AddFavouriteForm()
-    
-
-    # A HTTP POST?
-    if request.method == 'POST':
+    context_dict = {}
+    context_dict['boldmessage'] = 'Please enter a valid and existing restaurant name'
+    if 'text' in request.GET:
         user_profile = UserProfile.objects.get(username=request.user.username)
-        form = AddFavouriteForm(request.POST, instance=user_profile)
-        # Have we been provided with a valid form?
-        if form.is_valid():
-            # Save the new category to the database.
-            form = form.save(commit=False)
-          
-           
+        slugged = slugify(request.GET['text'])
+        
 
-            restaurantOb = Restaurant.objects.get(slug=slugify(form.favourites))
+        if slugged in user_profile.favourites:
+           
+            context_dict['boldmessage'] = 'That restaurant is already in your favourites'
             
-            user_profile.favourites.append(restaurantOb)
-            form.save()
-            #form.save()
-            print("working stxsill")
-            # Now that the category is saved, we could confirm this.
-            # For now, just redirect the user back to the index view.
-            return(render(request, 'food/index.html'))
-        else:
-            # The supplied form contained errors -
-            # just print them to the terminal.
-            print(form.errors)
+            #return response
+        elif Restaurant.objects.filter(slug=slugged):
+          
+            user_profile.favourites.append(slugged)
+        
+       
+         
+        
+       
+        context_dict['slugs'] = []
+        for favourite in user_profile.favourites:
+            context_dict['slugs'].append(favourite)  
+        user_profile.save()
+        
+    
     
     # Will handle the bad form, new form, or no form supplied cases.
     # Render the form with error messages (if any).
-    context_dict = {}
-    context_dict['boldmessage'] = 'Welcome to Glasgow Food Guide!'
-    userp = UserProfile.objects.get(username=request.user.username)
-    context_dict['user_profile'] = userp
-    context_dict['slugs'] = []
-    for fav in userp.favourites:
-        print("fav"+fav)
-        context_dict['slugs'].append(slugify(fav))
-    print(context_dict['slugs'])
-    context_dict['form'] = form
-    response = render(request, 'food/account.html', context=context_dict)
+   
+    
+    response = render(request, 'food/account.html',context=context_dict)
     return response
 
