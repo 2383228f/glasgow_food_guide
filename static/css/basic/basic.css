@@ -8,24 +8,25 @@
 	
 }
 
-
-
-
-
-
-body {
+html{	height:100%;
+width:100%;}
+	
+form{
+	text-align: center;
+}
+body{
 	font-family: 'Arial' , 'Helvetica', sans-serif;
-	text-align:center;
-	background:#FFE4B5 url(glasgow.jpg) no-repeat;
-	background-size: cover;
-	height: 1000px;
+	background:#FFE4B5 url(glasgow.jpg) no-repeat  ;
+	background-size:cover;
+
 	
 }
 
 form{
+	
 	margin: 10px;
 	padding:10px;
-	border:3px solid green:
+	
 }
 
 input{
@@ -37,7 +38,8 @@ input{
 nav {
     background:#0082e6;
 	height:80px;
-	width;100%;
+	width:100%;
+
 	
 	
 	
@@ -47,14 +49,16 @@ label.logo{
 color:white;
 font-size: 50px;
 line-height: 80px;
-padding: 0 100px;
+padding: 100px;
 font-weight: bold;
-margin-left;20px;}
+margin-left;10px;}
 
 
 nav ul{
+	color: white;
 	float: right;
-	margin-right: 20px;
+	margin-right: 30px;
+	border-spacing:10px;
 }
 nav ul li{
 	display: inline-block;
@@ -74,6 +78,21 @@ a.active,a:hover{
 	 transition:.5s;
 }
 
+footer{
+bottom:10px;
+position: fixed;
+background:#0082e6;
+left: 30px;
+margin:10px;
+padding:15px;
+border-radius: 25px;
+}
 
+box{
 
+background:#0082e6;
+margin:10px;
+padding:15px;
+border-radius: 25px;
+}
 
