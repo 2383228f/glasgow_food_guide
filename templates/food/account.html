@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+{% extends 'food/base.html' %}
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/basic/basic.css' %}">
+
+{% block title_block %}
+    {% if  user_profile %}
+        {{ user_profile.username }}
+        
+    {% else %}
+        Unknown Category
+    {% endif %}
+{% endblock %}
+
+{% block body_block %}
+
+    {% for slug in slugs %}
+
+         <li>
+            <a href="{% url 'food:show_restaurant' slug %}">
+                {{ slug }}
+            </a>
+        </li>
+    {% endfor %}
+
+
+  
+    <form id="comment_form" method="post" action="{% url 'food:add_favourite'  %}">
+
+                {% csrf_token %}
+                    Please enter the name of one of your favourite restaurant
+                   {% for field in form.visible_fields %}
+                    {{field}}
+                {%endfor%}
+         <input type="submit" name="submit" value="Add favourite" />
+    </form>
+
+ {% endblock %}

@@ -14,7 +14,7 @@
 		<h1>Home</h1>
 
 		
-		
+		{{boldmessage}}
 		<form id = "seach_form" method = "get" action="{% url 'food:search' %}">
 		
 		<input type= "text" name =text class = "search" placeholder = "Search Here">
@@ -23,9 +23,9 @@
 		
 		<div>
             <li><a href="{% url 'food:show_restaurants' %}">See our restaurants!</a></li>
-			{% if user.is_authenticated %}
-            
-            <li><a href="{% url 'food:add_restaurant' %}">Add a restaurant!</a></li>
+
+            {% if user_profile.is_owner %}
+                <li><a href="{% url 'food:add_restaurant' %}">Add a restaurant!</a></li>
             
 			{% endif %}
 		</div>

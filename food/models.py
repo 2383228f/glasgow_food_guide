@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.fields import CharField, AutoField, IntegerField,EmailField
 from django.template.defaultfilters import slugify
+from django_mysql.models import ListCharField
 
 
 # Create your models here.
@@ -11,7 +12,7 @@ class UserProfile(models.Model):
 	username = CharField(max_length=100, default="hello")
 	is_owner = models.BooleanField(default=False)
 	verified_by = models.ForeignKey('self',on_delete=models.CASCADE, related_name='+',blank = True, null = True)
-	
+	favourites = ListCharField(max_length=100,base_field=CharField(max_length=100),null=True,blank=True,default='')
 	def __str__(self):
 		return self.username
 	

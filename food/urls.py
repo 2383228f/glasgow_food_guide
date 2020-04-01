@@ -13,4 +13,7 @@ urlpatterns = [
     path('restaurants/<slug:restaurant_name_slug>/',views.show_restaurant, name='show_restaurant'),
     path('restaurants/',views.show_restaurants, name='show_restaurants'),
     path('search/',views.search,name='search'),
+    #path('account/',views.account,name='account'),
+    path('account/',views.add_favourite,name='add_favourite'),
+
 ]

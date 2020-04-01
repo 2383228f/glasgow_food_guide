@@ -50,3 +50,10 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields =('comment','rating','restaurant','price')
+        
+class AddFavouriteForm(forms.ModelForm):
+    favourites = forms.CharField(max_length=50,help_text="please enter the restaurant name",required=False)
+    
+    class Meta:
+        model=UserProfile
+        fields = ('favourites',)
