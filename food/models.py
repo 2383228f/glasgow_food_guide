@@ -28,6 +28,7 @@ class Restaurant(models.Model):
 	email_address = EmailField(blank=True, null=True)
 	rating = IntegerField(default=0)
 	price = IntegerField(default=0)
+	picture = CharField(max_length = 100)
 	lat = FloatField(default=55.8642)
 	lng = FloatField(default=-4.2518)
 	
