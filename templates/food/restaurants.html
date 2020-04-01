@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+
+{% extends 'food/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Restaurants
+{% endblock %}
+
+{% block body_block %}
+    {% for restaurant in restaurants %}
+        <li>
+            <a href="{% url 'food:show_restaurant' restaurant.slug %}">
+                {{ restaurant.name }}
+            </a>
+        </li>
+    {% endfor %}
+ {% endblock %}

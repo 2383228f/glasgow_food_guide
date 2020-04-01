@@ -182,4 +182,10 @@ def show_restaurant(request, restaurant_name_slug):
         
     # Go render the response and return it to the client.
     return render(request, 'food/restaurant.html', context=context_dict)
-    
+
+def show_restaurants(request):
+    context_dict = {}
+    context_dict['restaurants']= Restaurant.objects.all()
+
+    response = render(request, 'food/restaurants.html', context=context_dict)
+    return response
