@@ -9,9 +9,8 @@
 		<link rel="stylesheet" type="text/css" href="{% static 'css/basic/basic.css' %}">
 		
 		 <title>
-			Rango - 
 			{% block title_block %}
-				How to Tango with Django!
+				Glasgow Food Guide
 			{% endblock %}
 		</title>
 
@@ -24,7 +23,7 @@
 					<label class="logo"> GlasgowFoood</label>
 					<ul>
 					<a>{% if user.is_authenticated %}
-				    howdy {{ user.username }}!</a>
+				    Hello {{ user.username }}</a>
 		
 					<li><a href="{% url 'food:logout' %}">Logout</a></li>
 					<li><a class="active" href="{% url 'food:index' %}">Homepage</a></li>

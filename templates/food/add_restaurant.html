@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 {% extends 'food/base.html' %}
 {% block title_block %}
-    Add a Category
+    Add Restaurant
 {% endblock %}
     
 {% block body_block %}
@@ -14,11 +14,13 @@
                         {{ hidden }}
                     {% endfor %}
                     {% for field in form.visible_fields %}
+			<br>
                         {{ field.errors }}
                         {{ field.help_text }}
                         {{ field }}
                     {% endfor %}
-                    <input type="submit" name="submit" value="Create Category" />
+			<br>
+                    <input type="submit" name="submit" value="Add Restaurant" />
                 </form>
             </div>
         {% endif %}
