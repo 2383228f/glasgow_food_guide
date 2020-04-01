@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block body_block %}
-    <h1>Login to Rango</h1>
+    <h1>Login to Glasgow Food</h1>
     <form id="login_form" method="post" action="{% url 'food:login' %}">
         {% csrf_token %}
         Username: <input type="text" name="username" value="" size="50" />
