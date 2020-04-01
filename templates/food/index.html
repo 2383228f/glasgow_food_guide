@@ -13,14 +13,6 @@
 {% block body_block %}
 		<h1>Home</h1>
 
-		
-		
-		<form id = "seach_form" method = "get" action="{% url 'food:search' %}">
-		
-		<input class="logo" type= "text" name =text class = "search" placeholder = "Restaurant Search">
-		<input class="logo2" type= "submit" name =submit class = "submit" value = "Search">
-		</form>	
-		
 		<div>
               <li><a href="{% url 'food:show_restaurants' %}">See our restaurants!</a></li>
 
@@ -29,6 +21,14 @@
             
 			{% endif %}
 		</div>
+		
+		<form id = "seach_form" method = "get" action="{% url 'food:search' %}">
+		
+		<input class="logo" type= "text" name =text class = "search" placeholder = "Restaurant Search">
+		<input class="logo2" type= "submit" name =submit class = "submit" value = "Search">
+		</form>	
+		
+
 		
 	<div class="slidershow middle">
 
