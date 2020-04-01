@@ -8,6 +8,7 @@ from django.http import HttpResponse
 import profile
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
+from django.template.defaultfilters import slugify
 # Create your views here.
 def index(request):
    
@@ -189,3 +190,17 @@ def show_restaurants(request):
 
     response = render(request, 'food/restaurants.html', context=context_dict)
     return response
+
+def search(request):
+
+    
+    if 'text' in request.GET:
+        slugged = slugify(request.GET['text'])
+        restaurant = Restaurant.objects.filter(slug=slugged)
+        if restaurant:
+            return redirect(reverse('food:show_restaurant',kwargs={'restaurant_name_slug':slugged}))
+        else:
+            context_dict = {}
+            context_dict['boldmessage'] = 'Please enter the slugged restaurant name eg: pizza-express'
+
+            return(render(request, 'food/index.html', context=context_dict))
