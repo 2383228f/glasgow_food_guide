@@ -1,6 +1,6 @@
 from django.urls import path
 from food import views
-from food.views import show_restaurant
+
 
 app_name = 'food'
 urlpatterns = [

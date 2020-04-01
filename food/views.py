@@ -118,28 +118,40 @@ def add_restaurant(request):
     return render(request, 'food/add_restaurant.html', {'form': form})
 
 def add_comment(request, restaurant_name_slug):
+    
+    try:
+        restaurant = Restaurant.objects.get(slug=restaurant_name_slug)
+    except Restaurant.DoesNotExist:
+        restaurant = None
+    print(restaurant.slug)
+    if restaurant is None:
+        return redirect('/food/')
     form = CommentForm()
     # A HTTP POST?
     if request.method == 'POST':
         form = CommentForm(request.POST)
         # Have we been provided with a valid form?
         if form.is_valid():
-            # Save the new category to the database.
-            form = form.save(commit=False)
-            form.date_time =datetime.now()
-            form.restaurant = Restaurant.objects.get(slug=restaurant_name_slug)
-            form.user = UserProfile.objects.get(username=request.user.username)
-            form.save()
-            # Now that the category is saved, we could confirm this.
-            # For now, just redirect the user back to the index view.
-            return redirect('/food/')
+            print(restaurant.slug)
+            if restaurant:
+                # Save the new category to the database.
+                form = form.save(commit=False)
+                form.date_time =datetime.now()
+                form.restaurant = Restaurant.objects.get(slug=restaurant_name_slug)
+                form.user = UserProfile.objects.get(username=request.user.username)
+                form.save()
+                # Now that the category is saved, we could confirm this.
+                # For now, just redirect the user back to the index view.
+                return redirect(reverse('food:show_restaurant',kwargs={'restaurant_name_slug':restaurant_name_slug}))
         else:
             # The supplied form contained errors -
             # just print them to the terminal.
             print(form.errors)
     # Will handle the bad form, new form, or no form supplied cases.
     # Render the form with error messages (if any).
-    return render(request, 'food/add_comment.html', {'form': form})
+    context_dict = {'form': form, 'restaurant': restaurant}
+    return render(request, 'food/add_comment.html', context=context_dict)
+
 
 def show_restaurant(request, restaurant_name_slug):
     # Create a context dictionary which we can pass

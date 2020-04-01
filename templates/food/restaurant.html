@@ -24,7 +24,8 @@
             <strong>No comments currently in restaurant.</strong>
         {% endif %}
         {% if user.is_authenticated %}
-            <!--<a href="{% url 'food:add_comment' %}">Add comment</a> <br />-->
+            
+
             <a href="{% url 'food:add_comment' restaurant.slug %}">Add Comment</a> <br />
 
         {% endif %}
