@@ -9,21 +9,22 @@
 		<link rel="stylesheet" type="text/css" href="{% static 'css/basic/basic.css' %}">
 		
 		 <title>
+
 			{% block title_block %}
-				Glasgow Food Guide
+				Welcome to Glasgow Food Guide!
 			{% endblock %}
 		</title>
 
 	  </head>
     <body>
-	<div>
+	
 	{% if user.is_authenticated %}
 					<!-- Show these links when the user is logged in -->
 					<nav>
-					<label class="logo"> GlasgowFoood</label>
+					<label class="logo"> GlasgowFood</label>
 					<ul>
 					<a>{% if user.is_authenticated %}
-				    Hello {{ user.username }}</a>
+				    howdy {{ user.username }}!</a>
 		
 					<li><a href="{% url 'food:logout' %}">Logout</a></li>
 					<li><a class="active" href="{% url 'food:index' %}">Homepage</a></li>
@@ -34,7 +35,7 @@
 		{% else %}
 					<!-- Show these links when the user is NOT logged in -->
 					<nav>
-					<label class="logo"> GlasgowFoood</label>
+					<label class="logo"> GlasgowFood</label>
 					<ul>
 					<li><a href="{% url 'food:register' %}">Sign Up</a></li>
 					<li><a href="{% url 'food:login' %}">Log In</a></li>
@@ -45,10 +46,10 @@
 					
 		{% endif %}
 		{% block body_block %}
-			Welcome to Glasgow Food Guide!
+			This is body_block's default content.
 		{% endblock %}
 	
-		</div>
+		
 		<footer>Contact Details +132041230482134</footer>
 		<div>
 			{%block sidebar_block %}

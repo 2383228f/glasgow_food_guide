@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.db.models.fields import CharField, AutoField, IntegerField,EmailField
+from django.db.models.fields import CharField, AutoField, IntegerField,EmailField, FloatField
 from django.template.defaultfilters import slugify
 from django_mysql.models import ListCharField
 
@@ -28,6 +28,8 @@ class Restaurant(models.Model):
 	email_address = EmailField(blank=True, null=True)
 	rating = IntegerField(default=0)
 	price = IntegerField(default=0)
+	lat = FloatField(default=55.8642)
+	lng = FloatField(default=-4.2518)
 	
 	def save(self, *args, **kwargs):
 		self.slug = slugify(self.name)
