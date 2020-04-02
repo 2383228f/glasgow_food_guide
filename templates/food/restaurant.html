@@ -15,11 +15,14 @@
 {% block body_block %}
     {% if restaurant %}
         <h1>{{ restaurant.name }}</h1>
-        {{restaurant.rating}}
-        {{restaurant.price}}
+		<center>
+		<h3> Restaurant rating: {{restaurant.rating}}</h3>
+		<h3> Restaurant price: {{restaurant.price}}</h3>
+		<img src="{{restaurant.picture}}" />
         {% if comments %}
             <ul>
 				<table class = "paleBlueRows">
+				
 					<thead>
 						<tr>
 							<th>Username</th>
@@ -41,7 +44,10 @@
 						{% endfor %} 
 					</tbody>
 				</table> 
+			<br>
             </ul>
+		<h3> Find us here! </h3>
+		</center>
 	<u2>
 	<div id="googleMap" style="width:100%;height:400px;"></div>
 

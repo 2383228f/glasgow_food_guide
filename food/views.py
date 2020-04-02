@@ -110,8 +110,7 @@ def add_restaurant(request):
             # Save the new category to the database.
             form = form.save(commit=False)
             form.owner = UserProfile.objects.get(username=request.user.username)
-            if form.picture != None:
-                form.model_pic = form.cleaned_data['picture']
+            print(form.picture)
             form.save()
             # Now that the category is saved, we could confirm this.
             # For now, just redirect the user back to the index view.
