@@ -147,6 +147,24 @@ def add_comment(request, restaurant_name_slug):
                 form.restaurant = Restaurant.objects.get(slug=restaurant_name_slug)
                 form.user = UserProfile.objects.get(username=request.user.username)
                 form.save()
+                
+                comment_set = Comment.objects.filter(restaurant=restaurant)
+                total=0
+                number=0
+                for comment in comment_set:
+                    total = total+comment.rating
+                    number = number+1
+                av_rating = total/number
+                restaurant.rating = av_rating
+                total=0
+                number=0
+                for comment in comment_set:
+                    total=total+comment.price
+                    number=number+1
+                av_price = total/number
+                restaurant.price = av_price
+                restaurant.save()
+                
                 # Now that the category is saved, we could confirm this.
                 # For now, just redirect the user back to the index view.
                 return redirect(reverse('food:show_restaurant',kwargs={'restaurant_name_slug':restaurant_name_slug}))

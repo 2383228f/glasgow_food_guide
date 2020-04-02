@@ -34,8 +34,8 @@ def populate():
     rest1.detailed = "Traditional pizza place that relies on traditional values"
     rest1.phone_number = 123457923
     rest1.email_address = "Joe@JoesPizza.co.uk"
-    rest1.rating=2
-    rest1.price=3
+    rest1.rating=4
+    rest1.price=2
     rest1.save()
     
     name = "Burger Place"
@@ -45,8 +45,8 @@ def populate():
     rest2.detailed = "We serve any type of burger you can imagine!"
     rest2.phone_number = 21341234
     rest2.email_address = "Joe@BurgerPlace.co.uk"
-    rest2.rating=3
-    rest2.price=2
+    rest2.rating=4
+    rest2.price=1
     rest2.save()
     
     comment1 = Comment.objects.get_or_create(user=userP2,restaurant=rest1,rating=5,price=3,date_time=None)[0]
@@ -54,7 +54,7 @@ def populate():
     comment1.date_time=datetime.now()
     comment1.save()
     
-    comment2 = Comment.objects.get_or_create(user=userP3,restaurant=rest1,rating=1,price=3,date_time=None)[0]
+    comment2 = Comment.objects.get_or_create(user=userP3,restaurant=rest1,rating=3,price=1,date_time=None)[0]
     comment2.comment = "Ok restaurant, too cheesy for me"
     comment2.date_time=datetime.now()
     comment2.save()
