@@ -136,7 +136,9 @@ position:fixed;
 table.paleBlueRows {
   font-family: "Times New Roman", Times, serif;
   border: 1px solid #FFFFFF;
-  width: 600px;
+  width:70%; 
+  margin-left:20%; 
+  margin-right:20%;
   height: 100px;
   text-align: center;
   border-collapse: collapse;
@@ -166,7 +168,10 @@ table.paleBlueRows thead th:first-child {
   border-left: none;
 }
 
- 
+img.sizing {
+  margin-left:20%; 
+  margin-right:20%;
+} 
   
 
 
