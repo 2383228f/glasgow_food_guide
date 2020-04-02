@@ -46,7 +46,7 @@ def populate():
     rest1.email_address = "Joe@JoesPizza.co.uk"
     rest1.rating=4
     rest1.price=2
-	rest1.picture = "/media/yum_9Gh9MpK.jpg"
+	rest1.picture = "/media/images/yum_9Gh9MpK.jpg"
     rest1.save()
     
     name = "Burger Place"
@@ -58,7 +58,7 @@ def populate():
     rest2.email_address = "Joe@BurgerPlace.co.uk"
     rest2.rating=4
     rest2.price=1
-	rest1.picture = "/media/nom_ZkUoSM8.jpg"
+	rest1.picture = "/media/images/nom_ZkUoSM8.jpg"
     rest2.save()
     
     comment1 = Comment.objects.get_or_create(user=userP2,restaurant=rest1,rating=5,price=3,date_time=None)[0]

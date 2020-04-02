@@ -108,13 +108,12 @@ def add_restaurant(request):
     form = RestaurantForm()
     # A HTTP POST?
     if request.method == 'POST':
-        form = RestaurantForm(request.POST)
+        form = RestaurantForm(request.POST, request.FILES)
         # Have we been provided with a valid form?
         if form.is_valid():
             # Save the new category to the database.
             form = form.save(commit=False)
             form.owner = UserProfile.objects.get(username=request.user.username)
-            print(form.picture)
             form.save()
             # Now that the category is saved, we could confirm this.
             # For now, just redirect the user back to the index view.

@@ -28,7 +28,7 @@ class Restaurant(models.Model):
 	email_address = EmailField(blank=True, null=True)
 	rating = IntegerField(default=0)
 	price = IntegerField(default=0)
-	picture = models.ImageField(upload_to=settings.MEDIA_ROOT, null=True)
+	picture = models.ImageField(upload_to='images/', null=True)
 	lat = FloatField(default=55.8642)
 	lng = FloatField(default=-4.2518)
 	

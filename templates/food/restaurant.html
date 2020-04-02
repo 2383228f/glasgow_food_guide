@@ -21,7 +21,7 @@
 		
 		
 		{% if restaurant.picture %}
-		  <img class="sizing" src="{{restaurant.picture}}" height="500" width="750"/>
+		  <img class="sizing" src="/media/{{restaurant.picture}}" height="500" width="750"/>
 		{% endif %}
         {% if comments %}
             <ul>
@@ -53,12 +53,12 @@
             <strong>No comments currently in restaurant.</strong>
         {% endif %}
         {% if user.is_authenticated %}
-            <a href="{% url 'food:add_comment' restaurant.slug %}">Add Comment</a> <br />
-
+			 <button onclick="window.location.href = '{% url 'food:add_comment' restaurant.slug %}';">Add Comment</button>
         {% endif %}
     {% else %}
         The specified restaurant does not exist.
     {% endif %}
+	<br>
 	<br>
 	<h3> Find us here! </h3>
 	</center>
