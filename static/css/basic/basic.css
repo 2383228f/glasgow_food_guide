@@ -168,7 +168,10 @@ table.paleBlueRows thead th:first-child {
   border-left: none;
 }
 
- 
+img.sizing {
+  margin-left:20%; 
+  margin-right:20%;
+} 
   
 
 
