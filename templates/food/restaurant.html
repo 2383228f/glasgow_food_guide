@@ -16,9 +16,13 @@
     {% if restaurant %}
         <h1>{{ restaurant.name }}</h1>
 		<center>
-		<h3> Restaurant rating: {{restaurant.rating}}</h3>
-		<h3> Restaurant price: {{restaurant.price}}</h3>
-		<img class="sizing" src="{{restaurant.picture}}" height="500" width="750"/>
+		<h3> Restaurant rating: {{restaurant.rating}}/5</h3>
+		<h3> Restaurant price: {{restaurant.price}}/3</h3>
+		
+		
+		{% if restaurant.picture %}
+		  <img class="sizing" src="{{restaurant.picture}}" height="500" width="750"/>
+		{% endif %}
         {% if comments %}
             <ul>
 				<table class = "paleBlueRows">
