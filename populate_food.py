@@ -5,7 +5,9 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE','glasgow_food_guide.settings')
 from django.template.defaultfilters import slugify
 from datetime import datetime
 import django
+
 django.setup()
+
 from django.contrib.auth.models import User
 from food.models import UserProfile, Restaurant, Comment
 def populate():
@@ -15,17 +17,25 @@ def populate():
     #This might seem a little bit confusing, but it allows us to iterate
     #through each data structure, and add the data to our models. 
     if not User.objects.filter(username="admin").exists():
-        user0 = User.objects.create_superuser(username="admin", email="admin@gfg.com", password="pass")
+        user0 = User.objects.create_superuser(username="admin", email="admin@gfg.com",password="temp")
+        user0.set_password("pass")
+        user0.save()
         userP0 = UserProfile.objects.get_or_create(user=user0,username=user0.username,is_owner=True)[0]
-    
+        
     user1 = User.objects.get_or_create(username="JoePizza",email="joe@gmail.com",password="password")[0]
     userP1 = UserProfile.objects.get_or_create(user=user1,username=user1.username,is_owner=True)[0]
+    user1.set_password("password")
+    user1.save()
     
     user2 = User.objects.get_or_create(username="Jane10",email="jane10@gmail.com",password="password")[0]
     userP2 = UserProfile.objects.get_or_create(user=user2,username=user2.username,is_owner=False)[0]
+    user2.set_password("password")
+    user2.save()
     
     user3 = User.objects.get_or_create(username="Jackie1234",email="jackie1234@gmail.com",password="password")[0]
     userP3 = UserProfile.objects.get_or_create(user=user3,username=user3.username,is_owner=False)[0]
+    user3.set_password("password")
+    user3.save()
     
     name = "Joes Pizza"
     rest1 = Restaurant.objects.get_or_create(owner=userP1,name="Joes Pizza",slug=slugify(name))[0]
