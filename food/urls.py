@@ -15,5 +15,6 @@ urlpatterns = [
     path('search/',views.search,name='search'),
     path('account/',views.account,name='account'),
     path('add_favourite/',views.add_favourite,name='add_favourite'),
+    path('order_by/',views.order_by,name='order_by'),
 
 ]

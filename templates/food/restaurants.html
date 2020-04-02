@@ -8,6 +8,16 @@
 {% endblock %}
 
 {% block body_block %}
+    Order By
+    <form id = "orderby_form" method = "get" action="{% url 'food:order_by' %}">
+        <input type = "radio" id = "price" name = "order_by" value="price">
+        <label for="price">Price</label><br>
+        <input type = "radio" id = "rating" name = "order_by" value="rating">
+        <label for="price">rating</label><br>
+        <input type= "submit" name =submit class = "submit" value = "order_by">            
+
+
+        </form>
     {% for restaurant in restaurants %}
         <li>
             <a href="{% url 'food:show_restaurant' restaurant.slug %}">

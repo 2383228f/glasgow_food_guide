@@ -231,10 +231,19 @@ def search(request):
             context_dict['boldmessage'] = 'Please enter the restaurant name eg: Pizza Express'
 
             return(render(request, 'food/index.html', context=context_dict))
+
+def order_by(request):
+    if 'order_by' in request.GET:
+        order_by = request.GET['order_by']
+        restaurant_list = Restaurant.objects.order_by(order_by)
+        context_dict = {}
+        context_dict['restaurants'] = restaurant_list
         
+        return render(request,'food/restaurants.html',context=context_dict)
+    else:
+        return show_restaurants(request)
 def account(request):
    
-    print("hello")
     context_dict = {}
     context_dict['boldmessage'] = 'Welcome to Glasgow Food Guide!'
     user_profile=UserProfile.objects.get(username=request.user.username)
