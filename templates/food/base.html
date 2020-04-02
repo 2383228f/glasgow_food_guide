@@ -25,7 +25,7 @@
 					<ul>
 					<a>{% if user.is_authenticated %}
 				    howdy {{ user.username }}!</a>
-		
+		            <li><a href="{% url 'food:account' %}">My account</a></li>
 					<li><a href="{% url 'food:logout' %}">Logout</a></li>
 					<li><a class="active" href="{% url 'food:index' %}">Homepage</a></li>
 		
