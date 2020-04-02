@@ -23,10 +23,10 @@ class RestaurantForm(forms.ModelForm):
     rating = forms.IntegerField(widget = forms.HiddenInput(), initial=0)
     price = forms.IntegerField(widget = forms.HiddenInput(), initial=0)
     owner = forms.ModelChoiceField(widget=forms.HiddenInput(),initial=UserProfile.objects.all().first(), queryset=UserProfile.objects.all())
-    picture = forms.ImageField()
+    picture = forms.ImageField(required=False)
     class Meta:
         model=Restaurant
-        fields=('name', 'address', 'overview','detailed','phone_number','email_address',)
+        fields=('name', 'address', 'overview','detailed','phone_number','email_address','picture',)
         
 class CommentForm(forms.ModelForm):
     comment = forms.CharField(max_length=1000, help_text="Please write your comment here.")
