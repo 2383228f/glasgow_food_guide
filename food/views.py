@@ -1,15 +1,19 @@
+from django.db.utils import OperationalError
+from django.contrib.auth.decorators import login_required
+from datetime import datetime
+from django.template.defaultfilters import slugify
+from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render
-from food.forms import UserForm, UserProfileForm, RestaurantForm, CommentForm,AddFavouriteForm
-from food.models import UserProfile, Comment, Restaurant
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.http import HttpResponse
 import profile
-from django.contrib.auth.decorators import login_required
-from datetime import datetime
-from django.template.defaultfilters import slugify
-from django.core.files.storage import FileSystemStorage
+try:
+    from food.forms import UserForm, UserProfileForm, RestaurantForm, CommentForm,AddFavouriteForm
+    from food.models import UserProfile, Comment, Restaurant
+except OperationalError:##Stops operationalerror from occuring if database does not exist yet
+    pass
 # Create your views here.
 def index(request):
    
