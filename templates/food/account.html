@@ -44,7 +44,7 @@
             <tbody>
                 {% for favourite in favourites %}
                     <tr>
-                        <td><a href="{% url 'food:show_restaurant' favourite %}"><h3>{{favourite}}<h3></td>
+                        <td><a href="{% url 'food:show_restaurant' favourite.slug %}"><h3>{{favourite}}<h3></td>
                     </tr>
                 {% endfor %} 
             </tbody>
