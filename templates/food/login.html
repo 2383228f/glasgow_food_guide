@@ -1,8 +1,10 @@
 <!DOCTYPE html>
+
 {% extends 'food/base.html' %}
 {% load staticfiles %}
-
+<link rel="stylesheet" type="text/css" href="{% static 'css/basic/login.css' %}">
 {% block title_block %}
+
     Login
 {% endblock %}
 
@@ -12,19 +14,23 @@
 {% endblock %}
 
 {% block body_block %}
-    <div class= "container">
-    <center>
-        <h1>Login to Glasgow Food</h1>
+<center>
+    <div class= "containeradd">
+    
+        <header>Login to Glasgow Food</header>
         <br>
         <form id="login_form" method="post" action="{% url 'food:login' %}">
             {% csrf_token %}
-            Username: <input type="text" name="username" value="" size="50" />
+
+            Username: <input  type="text" name="username" value="" size="50" />
             <br />
             <br>
             Password: <input type="password" name="password" value="" size="50" />
             <br />
             <br>
             <input type="submit" value="submit" />
+			  <br />
+            <br>
         </form>
     </center>
     </div>
