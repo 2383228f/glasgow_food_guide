@@ -56,8 +56,8 @@ padding:4px;
 
 .resized {
   position: relative;
-  max-width:75%;
-  max-height:700px;
+  max-width:55%;
+  max-height:550px;
   width: auto;
   height: auto;
 }
