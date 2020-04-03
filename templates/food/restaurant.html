@@ -20,6 +20,11 @@
 
 {% block body_block %}
     <div class="container">
+        <div align = "right">
+            <form id = "seach_form" method = "get" action="{% url 'food:search' %}">
+            <input  type= "text" name =text class = "search" placeholder = "Restaurant Search">
+            <input  type= "submit" name =submit class = "submit" value = "Search">
+        </div>
         <center>
         {% if restaurant %}
             <h1>{{ restaurant.name }}</h1>
