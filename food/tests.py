@@ -65,9 +65,29 @@ class Tests(TestCase):
 		directory_exists = os.path.isdir(templates_dir)
 		self.assertTrue(directory_exists)
 
-
-		
-	
-		
-
-
+class AdminTests(TestCase):
+	def setUp(self):
+		User.objects.create_superuser('testAdmin', 'email@email.com', 'adminPassword123')
+		self.client.login(username='testAdmin', password='adminPassword123')
+	def test_admin_interface_accessible(self):
+		response = self.client.get('/admin/')
+		self.assertEqual(response.status_code, 200)
+class PopulateTests(TestCase):
+	def setUp(self):
+		import populate_food
+		populate_food.populate()
+	def testUsers(self):
+		users = User.objects.filter()
+		#there should be 4 users
+		num_users = len(users)
+		self.assertEqual(num_users,4)
+	def testRest(self):
+		rest = Restaurant.objects.filter()
+		#there should be 2 restaurants
+		num_rest = len(rest)
+		self.assertEqual(num_rest,2)
+	def testCom(self):
+		com = Comment.objects.filter()
+		#there should be 3 comments
+		num_com = len(com)
+		self.assertEqual(num_com,3)
