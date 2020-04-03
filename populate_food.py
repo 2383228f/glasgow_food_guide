@@ -50,7 +50,7 @@ def populate():
     rest1.rating=4
     rest1.price=2
    
-    with open(os.path.join(BASE_DIR,'media/images/yum.jpg'),'rb') as f:
+    with open(os.path.join(BASE_DIR,'media/initial/pizza.jpg'),'rb') as f:
         django_file = File(f)
         rest1.picture.save('images/yum.jpg',django_file,save=True)
     rest1.save()
@@ -65,7 +65,7 @@ def populate():
     rest2.rating=4
     rest2.price=1
     
-    with open(os.path.join(BASE_DIR,'media/images/pizza.jpg'),'rb') as f:
+    with open(os.path.join(BASE_DIR,'media/initial/burger.jpg'),'rb') as f:
         django_file = File(f)
         rest2.picture.save('images/pizza.jpg',django_file,save=True)
     rest2.save()
