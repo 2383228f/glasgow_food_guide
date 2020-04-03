@@ -109,11 +109,6 @@ def add_restaurant(request):
     # A HTTP POST?
     if request.method == 'POST':
         form = RestaurantForm(request.POST, request.FILES)
-        form = form.save(commit=False)
-        if Restaurant.objects.get(slug=slugify(form.name)):
-            return redirect(reverse('food:show_restaurant',kwargs={'restaurant_name_slug':slugify(form.name)}))
-        
-        
        
         # Have we been provided with a valid form?
         if form.is_valid():
