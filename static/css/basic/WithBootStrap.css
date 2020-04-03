@@ -223,15 +223,5 @@ form.custom{
     border-radius: 10px;
     top:5%;
     position:relative;
-    
-.logo{
-  position: relative;
-  width: 60%;
-  height: auto%;
-  mix-blend-mode: multiply;
 }
-.logo img{
-  width: 80%;
-  height: 80%;
-  mix-blend-mode: multiply;
-}
+
