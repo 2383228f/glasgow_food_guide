@@ -5,33 +5,37 @@
 {% block title_block %}
     Register
 {% endblock %}
-
+<link rel="stylesheet" type="text/css" href="{% static 'css/basic/login.css' %}">
 {% block navbarleft_block %}
     <li><a href="{% url 'food:index' %}">Home</a></li>
 	<li><a href="{% url 'food:show_restaurants' %}">Restaurants</a></li>
 {% endblock %}
 
 {% block body_block %}
-    <div class="container"> 
-    <center>
-    <h1>Register for Glasgow Food Guide</h1>
-    </center>
+ <center>
+    <div class="containeradd"> 
+ 
+    <header>Register for Glasgow Food Guide</header>
+  
     {% if registered %}
         Food says: <strong>thank you for registering!</strong>
-        <a href="{% url 'food:index' %}">Return to the homepage.</a><br />
+        <a href="{% url 'food:index' %}">Return to the homepage.</a>
     {% else %}
-        Food says: <strong>register here!</strong><br />
+      <br></br>
         <form id="user_form" method="post" action="{% url 'food:register' %}" enctype="multipart/form-data">
 
             {% csrf_token %}
 
             <!-- Display each form -->
             {{ user_form.as_p }}
-          
+     
             <!-- Provide a button to click to submit the form. -->
+			<br></br>
             <input type="submit" name="submit" value="Register" />
+			<br></br>
         </form>
     {% endif %}
     </div>
+	  </center>
 {% endblock %}
 </html>
