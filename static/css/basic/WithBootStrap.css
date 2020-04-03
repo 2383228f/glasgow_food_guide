@@ -60,6 +60,7 @@ padding:4px;
   max-height:550px;
   width: auto;
   height: auto;
+  overflow: hidden;
 }
 .resized img{
   width: 100%;
