@@ -1,11 +1,11 @@
 import os
+from glasgow_food_guide.settings import BASE_DIR
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE','glasgow_food_guide.settings')
-
+from django.core.files import File
 from django.template.defaultfilters import slugify
 from datetime import datetime
 import django
-
 django.setup()
 
 from django.contrib.auth.models import User
@@ -20,22 +20,25 @@ def populate():
         user0 = User.objects.create_superuser(username="admin", email="admin@gfg.com",password="temp")
         user0.set_password("pass")
         user0.save()
-        userP0 = UserProfile.objects.get_or_create(user=user0,username=user0.username,is_owner=True)[0]
+    userP0 = UserProfile.objects.get_or_create(user=user0,username=user0.username,is_owner=True)[0]
         
-    user1 = User.objects.get_or_create(username="JoePizza",email="joe@gmail.com",password="password")[0]
-    userP1 = UserProfile.objects.get_or_create(user=user1,username=user1.username,is_owner=True)[0]
-    user1.set_password("password")
-    user1.save()
+    if not User.objects.filter(username="JoePizza").exists():    
+        user1 = User.objects.get_or_create(username="JoePizza",email="joe@gmail.com",password="password")[0]
+        userP1 = UserProfile.objects.get_or_create(user=user1,username=user1.username,is_owner=True)[0]
+        user1.set_password("password")
+        user1.save()
     
-    user2 = User.objects.get_or_create(username="Jane10",email="jane10@gmail.com",password="password")[0]
-    userP2 = UserProfile.objects.get_or_create(user=user2,username=user2.username,is_owner=False)[0]
-    user2.set_password("password")
-    user2.save()
+    if not User.objects.filter(username="Jane10").exists():
+        user2 = User.objects.get_or_create(username="Jane10",email="jane10@gmail.com",password="password")[0]
+        userP2 = UserProfile.objects.get_or_create(user=user2,username=user2.username,is_owner=False)[0]
+        user2.set_password("password")
+        user2.save()
     
-    user3 = User.objects.get_or_create(username="Jackie1234",email="jackie1234@gmail.com",password="password")[0]
-    userP3 = UserProfile.objects.get_or_create(user=user3,username=user3.username,is_owner=False)[0]
-    user3.set_password("password")
-    user3.save()
+    if not User.objects.filter(username="Jackie1234").exists():
+        user3 = User.objects.get_or_create(username="Jackie1234",email="jackie1234@gmail.com",password="password")[0]
+        userP3 = UserProfile.objects.get_or_create(user=user3,username=user3.username,is_owner=False)[0]
+        user3.set_password("password")
+        user3.save()
     
     name = "Joes Pizza"
     rest1 = Restaurant.objects.get_or_create(owner=userP1,name="Joes Pizza",slug=slugify(name))[0]
@@ -46,7 +49,10 @@ def populate():
     rest1.email_address = "Joe@JoesPizza.co.uk"
     rest1.rating=4
     rest1.price=2
-    rest1.picture = "/media/images/yum_9Gh9MpK.jpg"
+   
+    with open(os.path.join(BASE_DIR,'media/images/yum.jpg'),'rb') as f:
+        django_file = File(f)
+        rest1.picture.save('images/yum.jpg',django_file,save=True)
     rest1.save()
     
     name = "Burger Place"
@@ -58,7 +64,10 @@ def populate():
     rest2.email_address = "Joe@BurgerPlace.co.uk"
     rest2.rating=4
     rest2.price=1
-    rest1.picture = "/media/images/nom_ZkUoSM8.jpg"
+    
+    with open(os.path.join(BASE_DIR,'media/images/pizza.jpg'),'rb') as f:
+        django_file = File(f)
+        rest2.picture.save('images/pizza.jpg',django_file,save=True)
     rest2.save()
     
     comment1 = Comment.objects.get_or_create(user=userP2,restaurant=rest1,rating=5,price=3,date_time=None)[0]
