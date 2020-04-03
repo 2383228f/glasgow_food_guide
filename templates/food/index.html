@@ -11,60 +11,61 @@
 {% endblock %}
 
 {% block body_block %}
-		<h1>Home</h1>
+    <div class = "container">
+        
+        <center>
+        <h1>Welcome to Glasgow Food!</h1>
 
-		
-		
-		<form id = "seach_form" method = "get" action="{% url 'food:search' %}">
-		
-		<input  type= "text" name =text class = "search" placeholder = "Restaurant Search">
-		<input  type= "submit" name =submit class = "submit" value = "Search">
-		   			
-
-
-		</form>	
-	
-		
-	<div class="slidershow middle">
-
-      <div class="slides">
-        <input type="radio" name="r" id="r1">
-        <input type="radio" name="r" id="r2">
-        <input type="radio" name="r" id="r3">
-        <input type="radio" name="r" id="r4">
-        <input type="radio" name="r" id="r5">
-        <div class="slide s1">
-          <img src="{% static 'images/1.jpg' %}" alt="">
-        </div>
-        <div class="slide">
-          <img src="{% static 'images/2.jpg' %}" alt="">
-        </div>
-        <div class="slide">
-          <img src="{% static 'images/3.jpg' %}" alt="">
-        </div>
-        <div class="slide">
-          <img src="{% static 'images/4.jpg' %}" alt="">
-        </div>
-        <div class="slide">
-          <img src="{% static 'images/5.jpg' %}" alt="">
-        </div>
-      </div>
-
-      <div class="navigation">
-        <label for="r1" class="bar"></label>
-        <label for="r2" class="bar"></label>
-        <label for="r3" class="bar"></label>
-        <label for="r4" class="bar"></label>
-        <label for="r5" class="bar"></label>
-      </div>
-    </div>
-	
-	              <li><box><a href="{% url 'food:show_restaurants' %}">See our restaurants!</a></box></li>
-
-            {% if user_profile.is_owner %}
-                <li><box2><a href="{% url 'food:add_restaurant' %}">Add a restaurant!</box2></a></li>
+        <br>
+        <div>
+        
+		<form class = "custom" id = "seach_form" method = "get" action="{% url 'food:search' %}">
             
-			{% endif %}
+            <input class="custom logo" type= "text" name =text class = "search" placeholder = "Search your favourite restaurant here!">
+            <br>
+            <br>
+            <input class="custom logo2" type= "submit" name =submit class = "submit" value = "Search!">
+
+        </form>
+        </div>
+        <br>
+
+        <div class="slidershow">
+
+          <div class="slides">
+            <input type="radio" name="r" id="r1">
+            <input type="radio" name="r" id="r2">
+            <input type="radio" name="r" id="r3">
+            <input type="radio" name="r" id="r4">
+            <input type="radio" name="r" id="r5">
+            <div class="slide s1">
+              <img src="{% static 'images/1.jpg' %}" alt="">
+            </div>
+            <div class="slide">
+              <img src="{% static 'images/2.jpg' %}" alt="">
+            </div>
+            <div class="slide">
+              <img src="{% static 'images/3.jpg' %}" alt="">
+            </div>
+            <div class="slide">
+              <img src="{% static 'images/4.jpg' %}" alt="">
+            </div>
+            <div class="slide">
+              <img src="{% static 'images/5.jpg' %}" alt="">
+            </div>
+          </div>
+
+          <div class="navigation">
+            <label for="r1" class="bar"></label>
+            <label for="r2" class="bar"></label>
+            <label for="r3" class="bar"></label>
+            <label for="r4" class="bar"></label>
+            <label for="r5" class="bar"></label>
+          </div>
+        </div>
+        </center>
+    </div>
+    
 			
 {% endblock %}
 	
