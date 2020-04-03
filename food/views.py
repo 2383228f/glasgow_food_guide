@@ -295,7 +295,8 @@ def add_favourite(request):
     # Will handle the bad form, new form, or no form supplied cases.
     # Render the form with error messages (if any).
    
-    
+    user_profile=UserProfile.objects.get(username=request.user.username)
+    context_dict['user_profile'] = user_profile
     response = render(request, 'food/account.html',context=context_dict)
     return response
 
