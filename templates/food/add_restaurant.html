@@ -3,8 +3,15 @@
 {% block title_block %}
     Add Restaurant
 {% endblock %}
+
+{% block navbarleft_block %}
+    <li><a href="{% url 'food:index' %}">Home</a></li>
+	<li><a href="{% url 'food:show_restaurants' %}">Restaurants</a></li>
+{% endblock %}
     
 {% block body_block %}
+    <div class = "container">
+        <center>
         <h1>Add a Restaurant</h1>
         {% if user.is_authenticated %}
             <div>
@@ -24,6 +31,8 @@
                 </form>
             </div>
         {% endif %}
+        </center>
+    </div>
 {% endblock %}
 </html>
                     

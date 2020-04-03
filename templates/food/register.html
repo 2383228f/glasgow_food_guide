@@ -6,8 +6,16 @@
     Register
 {% endblock %}
 
+{% block navbarleft_block %}
+    <li><a href="{% url 'food:index' %}">Home</a></li>
+	<li><a href="{% url 'food:show_restaurants' %}">Restaurants</a></li>
+{% endblock %}
+
 {% block body_block %}
+    <div class="container"> 
+    <center>
     <h1>Register for Glasgow Food Guide</h1>
+    </center>
     {% if registered %}
         Food says: <strong>thank you for registering!</strong>
         <a href="{% url 'food:index' %}">Return to the homepage.</a><br />
@@ -24,5 +32,6 @@
             <input type="submit" name="submit" value="Register" />
         </form>
     {% endif %}
+    </div>
 {% endblock %}
 </html>

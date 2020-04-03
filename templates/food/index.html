@@ -10,20 +10,22 @@
 	Homepage
 {% endblock %}
 
+{% block navbarleft_block %}
+    <li class="active"><a href="{% url 'food:index' %}">Home</a></li>
+	<li><a href="{% url 'food:show_restaurants' %}">Restaurants</a></li>
+{% endblock %}
+
 {% block body_block %}
     <div class = "container">
         
         <center>
         <h1>Welcome to Glasgow Food!</h1>
-
-        <br>
         <div>
-        
+        <br>
 		<form class = "custom" id = "seach_form" method = "get" action="{% url 'food:search' %}">
             
             <input class="custom logo" type= "text" name =text class = "search" placeholder = "Search your favourite restaurant here!">
-            <br>
-            <br>
+          
             <input class="custom logo2" type= "submit" name =submit class = "submit" value = "Search!">
 
         </form>
@@ -39,9 +41,6 @@
             <input type="radio" name="r" id="r4">
             <input type="radio" name="r" id="r5">
             <div class="slide s1">
-              <img src="{% static 'images/1.jpg' %}" alt="">
-            </div>
-            <div class="slide">
               <img src="{% static 'images/2.jpg' %}" alt="">
             </div>
             <div class="slide">
@@ -52,6 +51,9 @@
             </div>
             <div class="slide">
               <img src="{% static 'images/5.jpg' %}" alt="">
+            </div>
+            <div class="slide">
+              <img src="{% static 'images/1.jpg' %}" alt="">
             </div>
           </div>
 

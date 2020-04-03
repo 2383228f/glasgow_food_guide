@@ -7,22 +7,58 @@
     Restaurants
 {% endblock %}
 
+{% block navbarleft_block %}
+    <li><a href="{% url 'food:index' %}">Home</a></li>
+	<li class="active"><a href="{% url 'food:show_restaurants' %}">Restaurants</a></li>
+{% endblock %}
+
 {% block body_block %}
-    Order By
+
+    <div class="container">
+        <div align = "right">
+            <form id = "seach_form" method = "get" action="{% url 'food:search' %}">
+            <input  type= "text" name =text class = "search" placeholder = "Restaurant Search">
+            <input  type= "submit" name =submit class = "submit" value = "Search">
+        </div>
+        
+        <center>
+            <h1> Restaurants </h1>
+        </center>
+        <br>
+         Order By
     <form id = "orderby_form" method = "get" action="{% url 'food:order_by' %}">
         <input type = "radio" id = "price" name = "order_by" value="price">
-        <label for="price">Price</label><br>
+        <label for="price">Price</label>
         <input type = "radio" id = "rating" name = "order_by" value="rating">
-        <label for="price">rating</label><br>
+        <label for="price">rating</label>
         <input type= "submit" name =submit class = "submit" value = "order_by">            
-
-
-        </form>
-    {% for restaurant in restaurants %}
-        <li>
-            <a href="{% url 'food:show_restaurant' restaurant.slug %}">
-                {{ restaurant.name }}
-            </a>
-        </li>
-    {% endfor %}
+    </form>
+        
+    <center>
+    <table class="steelBlueCols">
+        <thead>
+            <tr>
+            <th>picture</th>
+            <th>Restaurant name:</th>
+            <th>Overview</th>
+            <th>Rating</th>
+            <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>     
+            {% for restaurant in restaurants %}
+                <tr>
+                    <td><img class="sizing" src="/media/{{restaurant.picture}}" height="100" width="150"/></td>
+                    <td><a href="{% url 'food:show_restaurant' restaurant.slug %}" class="topic" style="color: #FFFFFF">
+                    {{ restaurant.name }}</a></td>
+                    <td>{{restaurant.overview}}</td>
+                    <td>{{restaurant.rating}}</td>
+                    <td>{{restaurant.price}}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>  
+    </center>
+       
  {% endblock %}
+ </html>

@@ -26,30 +26,19 @@
 					<a class="navbar-brand" href="{% url 'food:index' %}">GlasgowFood</a>
 				</div>
 				<ul class="nav navbar-nav">
-					
-                    <li><a href="{% url 'food:index' %}">Home</a></li>
-					<li><a href="{% url 'food:show_restaurants' %}">Restaurants</a></li>
+					{% block navbarleft_block %}
+                    Navbar
+                    {% endblock %}
 				</ul>
                 <ul class="nav navbar-nav navbar-right">
+                    
                     {% if user.is_authenticated %}
-                            {% if user_profile.is_owner %}
-                                <li class="dropdown">
-                                    <a class="dropdown-toggle" data-toggle="dropdown" href="">My Account
-                                        <span class="caret"></span></a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="{% url 'food:account' %}">View Account</a></li>
-                                            <li><a href="{% url 'food:add_restaurant' %}">Add a restaurant!</a></li>
-                                        
-                                        </ul>
-                                </li>
-                            {% else %}
-                                <li><a href="{% url 'food:account' %}">My account</a></li>
-                            {% endif %}  
-                            <li><a href="{% url 'food:logout' %}">Logout</a></li>
-                        {% else %}  
-                            <li><a href="{% url 'food:register' %}">Sign Up</a></li>
-                            <li><a href="{% url 'food:login' %}">Log In</a></li>
-                        {% endif %} 
+                        <li><a href="{% url 'food:account' %}">My Account</a></li> 
+                        <li><a href="{% url 'food:logout' %}">Logout</a></li>
+                    {% else %}  
+                        <li><a href="{% url 'food:register' %}">Sign Up</a></li>
+                        <li><a href="{% url 'food:login' %}">Log In</a></li>
+                    {% endif %} 
                 </ul>
 			</div>
 		</nav>

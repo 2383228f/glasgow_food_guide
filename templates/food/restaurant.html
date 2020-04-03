@@ -2,7 +2,7 @@
 
 {% extends 'food/base.html' %}
 {% load staticfiles %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/basic/basic.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/basic/WithBootStrap.css' %}">
 
 {% block title_block %}
     {% if restaurant %}
@@ -12,60 +12,93 @@
     {% endif %}
 {% endblock %}
 
-{% block body_block %}
-    {% if restaurant %}
-        <h1>{{ restaurant.name }}</h1>
-		<center>
-		<h3> Restaurant rating: {{restaurant.rating}}/5</h3>
-		<h3> Restaurant price: {{restaurant.price}}/3</h3>
-		
-		
-		{% if restaurant.picture %}
-		  <img class="sizing" src="/media/{{restaurant.picture}}" height="500" width="750"/>
-		{% endif %}
-        {% if comments %}
-            <ul>
-				<table class = "paleBlueRows">
-				
-					<thead>
-						<tr>
-							<th>Username</th>
-							<th>Rating</th>
-							<th>Price Rating</th>
-							<th>Comment</th>
-							<th>Date</th>
-						</tr>
-					</thead>
-					<tbody>
-						{% for comment in comments %}
-							<tr>
-								<td>{{comment.user.username}}</td>
-								<td>{{comment.rating}}</td>
-								<td>{{comment.price}}</td>
-								<td>{{comment.comment}}</td>
-								<td>{{comment.date_time}}</td>
-							</tr>
-						{% endfor %} 
-					</tbody>
-				</table> 
-            </ul>
-		{% else %}
-            <strong>No comments currently in restaurant.</strong>
-        {% endif %}
-        {% if user.is_authenticated %}
-			 <button onclick="window.location.href = '{% url 'food:add_comment' restaurant.slug %}';">Add Comment</button>
-        {% endif %}
-    {% else %}
-        The specified restaurant does not exist.
-    {% endif %}
-	<br>
-	<br>
-	<h3> Find us here! </h3>
-	</center>
-	
-	<u2>
-	<div id="googleMap" style="width:100%;height:400px;"></div>
+{% block navbarleft_block %}
+    <li><a href="{% url 'food:index' %}">Home</a></li>
+	<li class="active"><a href="{% url 'food:show_restaurants' %}">Restaurants</a></li>
+{% endblock %}
 
+
+{% block body_block %}
+    <div class="container">
+        <center>
+        {% if restaurant %}
+            <h1>{{ restaurant.name }}</h1>
+            {% if restaurant.picture %}
+            <div class = "resized">
+                <img src="/media/{{restaurant.picture}}"/>
+            </div>
+            {% endif %}
+            <br>
+            <table class="steelBlueCols">
+                <tbody>
+                    <tr>
+                        <td>{{restaurant.detailed}}</td>
+                    </tr>
+                </tbody>
+            </table>
+             
+            <table class="steelBlueCols">
+                <tbody>
+                    <tr>
+                        <td>Restaurant rating: {{restaurant.rating}}/5</th>
+                        <td>Restaurant price: {{restaurant.price}}/3</th>
+                    </tr>
+                    <tr>
+                        <td> Email: {{restaurant.email_address}} </td>
+                        <td> Phone Number: {{restaurant.phone_number}} </td>
+                    </tr>
+                    <tr>
+                        <td>Address:</td>
+                        <td> {{restaurant.address}} </td>
+                </tbody>
+            </table>
+               
+            <br>
+            {% if comments %}
+                <ul>
+                    <table class = "paleBlueRows">
+                    
+                        <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th>Rating</th>
+                                <th>Price Rating</th>
+                                <th>Comment</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for comment in comments %}
+                                <tr>
+                                    <td>{{comment.user.username}}</td>
+                                    <td>{{comment.rating}}</td>
+                                    <td>{{comment.price}}</td>
+                                    <td>{{comment.comment}}</td>
+                                    <td>{{comment.date_time}}</td>
+                                </tr>
+                            {% endfor %} 
+                        </tbody>
+                    </table> 
+                </ul>
+            {% else %}
+                <strong>No comments currently in restaurant.</strong>
+            {% endif %}
+            {% if user.is_authenticated %}
+                 <button onclick="window.location.href = '{% url 'food:add_comment' restaurant.slug %}';">Add Comment</button>
+            {% endif %}
+        {% else %}
+            The specified restaurant does not exist.
+        {% endif %}
+        <br>
+        <br>
+        </center>
+    </div>
+	
+    <div class = "container">
+	<u2>
+        <div id="googleMap" style="width:100%;height:400px;"></div>
+    </div>
+    
 <script>
 function myMap() {
 var myLatLng = {lat: {{restaurant.lat}}, lng: {{restaurant.lng}}};
@@ -85,3 +118,5 @@ var marker = new google.maps.Marker({
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmUGPJiebANVL4RREtEf85KvCiYHE6GlU&callback=myMap"></script>
 	</u2>
  {% endblock %}
+ 
+ </html>

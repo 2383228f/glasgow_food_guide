@@ -6,14 +6,27 @@
     Login
 {% endblock %}
 
-{% block body_block %}
-    <h1>Login to Glasgow Food</h1>
-    <form id="login_form" method="post" action="{% url 'food:login' %}">
-        {% csrf_token %}
-        Username: <input type="text" name="username" value="" size="50" />
-        <br />
-        Password: <input type="password" name="password" value="" size="50" />
-        <br />
-        <input type="submit" value="submit" />
-    </form>
+{% block navbarleft_block %}
+    <li><a href="{% url 'food:index' %}">Home</a></li>
+	<li><a href="{% url 'food:show_restaurants' %}">Restaurants</a></li>
 {% endblock %}
+
+{% block body_block %}
+    <div class= "container">
+    <center>
+        <h1>Login to Glasgow Food</h1>
+        <br>
+        <form id="login_form" method="post" action="{% url 'food:login' %}">
+            {% csrf_token %}
+            Username: <input type="text" name="username" value="" size="50" />
+            <br />
+            <br>
+            Password: <input type="password" name="password" value="" size="50" />
+            <br />
+            <br>
+            <input type="submit" value="submit" />
+        </form>
+    </center>
+    </div>
+{% endblock %}
+</html>
