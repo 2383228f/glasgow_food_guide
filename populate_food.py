@@ -11,16 +11,11 @@ django.setup()
 from django.contrib.auth.models import User
 from food.models import UserProfile, Restaurant, Comment
 def populate():
-    #First, we will create lists of dictionaries containing the pages
-    #we want to add into each category.
-    #Then we will create a dictionary of dictionaries for out categories.
-    #This might seem a little bit confusing, but it allows us to iterate
-    #through each data structure, and add the data to our models. 
     if not User.objects.filter(username="admin").exists():
         user0 = User.objects.create_superuser(username="admin", email="admin@gfg.com",password="temp")
         user0.set_password("pass")
         user0.save()
-    userP0 = UserProfile.objects.get_or_create(user=user0,username=user0.username,is_owner=True)[0]
+        userP0 = UserProfile.objects.get_or_create(user=user0,username=user0.username,is_owner=True)[0]
         
     if not User.objects.filter(username="JoePizza").exists():    
         user1 = User.objects.get_or_create(username="JoePizza",email="joe@gmail.com",password="password")[0]
@@ -84,7 +79,7 @@ def populate():
     comment3.comment = "Delicious burgers and soda"
     comment3.date_time=datetime.now()
     comment3.save()
-# Start execution here!
+
 if __name__ == '__main__':
     print('Starting Rango population script...')
     populate()
