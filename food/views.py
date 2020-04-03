@@ -248,9 +248,13 @@ def account(request):
     context_dict['boldmessage'] = 'Welcome to Glasgow Food Guide!'
     user_profile=UserProfile.objects.get(username=request.user.username)
     context_dict['user_profile'] = user_profile
-    context_dict['slugs'] = []
+    context_dict['favourites'] = []
+    favouriteRests = []
+    #favouriteRests = Restaurant.objects.filter(slug=slugged)
     for favourite in user_profile.favourites:
-        context_dict['slugs'].append(favourite)
+        favouriteRests.append(Restaurant.objects.get(slug=favourite))
+        
+    context_dict['favourites']=(favouriteRests)
 
     
     response = render(request, 'food/account.html', context=context_dict)
@@ -275,12 +279,15 @@ def add_favourite(request):
             user_profile.favourites.append(slugged)
         
        
-         
+        favourites=[]
+        for favourite in user_profile.favourites:
+            favourites.append(Restaurant.objects.get(slug=favourite))
         
        
         context_dict['favourites'] = []
-        for favourite in user_profile.favourites:
-            context_dict['favourites'].append(favourite)  
+    
+            
+        context_dict['favourites'] =favourites 
         user_profile.save()
         
     
