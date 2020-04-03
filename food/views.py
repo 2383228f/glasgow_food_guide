@@ -232,6 +232,7 @@ def search(request):
             return(render(request, 'food/index.html', context=context_dict))
 
 def order_by(request):
+
     if 'order_by' in request.GET:
         order_by = request.GET['order_by']
         restaurant_list = Restaurant.objects.order_by(order_by)
@@ -277,9 +278,9 @@ def add_favourite(request):
          
         
        
-        context_dict['slugs'] = []
+        context_dict['favourites'] = []
         for favourite in user_profile.favourites:
-            context_dict['slugs'].append(favourite)  
+            context_dict['favourites'].append(favourite)  
         user_profile.save()
         
     
