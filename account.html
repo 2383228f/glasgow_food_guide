@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+{% extends 'food/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    {% if  user_profile %}
+        {{ user_profile.username }}
+        
+    {% else %}
+        Unknown Category
+    {% endif %}
+{% endblock %}
+
+
+{% block navbarleft_block %}
+    
+        <li><a href="{% url 'food:index' %}">Home</a></li>
+        <li><a href="{% url 'food:show_restaurants' %}">Restaurants</a></li>
+    {% endblock %}
+
+{% block body_block %}
+    <div class="container">
+    <center>
+        <h2>Welcome back to your profile {{ user_profile.username }}</h2>   
+    </center>
+    <br>  
+    
+    {% if user_profile.is_owner %}
+        Add you restaurant here! 
+        <button onclick="window.location.href = '{% url 'food:add_restaurant' %}';">Add your restaurant!</button>
+    {% endif %}
+    <br>
+    <br>
+    
+    {% if favourites %}
+        <center>
+        <table class = "steelBlueCols">
+            <thead>
+            <tr>
+            <th>Picture:</th>
+            <th>Restaurant name:</th>
+            <th>Overview</th>
+            <th>Rating</th>
+            <th>Price</th>
+            </tr>
+        </thead>
+            <tbody>
+                {% for favourite in favourites %}
+                    <tr>
+                    <td><img class="sizing" src="/media/{{favourite.picture}}" height="100" width="150"/></td>
+                    <td><a href="{% url 'food:show_restaurant' favourite.slug %}" class="topic" style="color: #FFFFFF">
+                    {{ favourite.name }}</a></td>
+                    <td>{{favourite.overview}}</td>
+                    <td>{{favourite.rating}}</td>
+                    <td>{{favourite.price}}</td>
+                </tr>
+                {% endfor %} 
+            </tbody>
+        </table> 
+        </center>
+    {% else %}
+        <strong>You have not yet added any restaurant to your favourite list.</strong>
+    {% endif %}
+    <br>
+    <h4>Add a new favourite </h4>
+    <form id = "add_favourite_form" method = "get" action="{% url 'food:add_favourite' %}">
+        <input type= "text" name =text class = "search" placeholder = "Type restaurant name here">
+        <input type= "submit" name =submit class = "submit" value = "Search">
+    </form>
+    </div>
+ {% endblock %}
+ </html>
